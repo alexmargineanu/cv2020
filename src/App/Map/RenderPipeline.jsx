@@ -8,7 +8,7 @@ import {
 const projection = d3.geoMercator().translate(
     [window.innerWidth / 2, window.innerHeight / 2]
 ).scale(
-    222
+    160
 );
 
 const path = d3.geoPath().projection(projection);
