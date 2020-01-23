@@ -1,6 +1,7 @@
 ## About the project
 The app takes as input the **.ics** file exported from your favorite calendar, and outputs your flight history animated on a D3 map of the world.
 
+**Demo:** [https://alexmargineanu.github.io/cv2020/](https://alexmargineanu.github.io/cv2020/)
 ![UI Preview](https://alexmargineanu.github.io/cv2020/preview.png)
 
 #### The calendar entries need to follow this format:
