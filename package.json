@@ -1,4 +1,5 @@
 {
+  "homepage": "https://alexmargineanu.github.io/cv2020/",
   "name": "cv2020",
   "description": "Flight data visualiser with d3 based on calendar events (ICAL)",
   "version": "0.1.0",
@@ -7,7 +8,6 @@
     "type": "git",
     "url": "https://github.com/alexmargineanu/cv2020"
   },
-  "homepage" : "https://alexmargineanu.github.io/cv2020/",
   "author": {
     "name": "Alexandru Margineanu",
     "email": "alex.margineanu@gmail.com"
@@ -20,6 +20,7 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "d3": "^5.15.0",
+    "gh-pages": "^2.2.0",
     "ical.js": "^1.3.0",
     "moment": "^2.24.0",
     "node-sass": "^4.13.1",
@@ -35,7 +36,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"
