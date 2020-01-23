@@ -20,7 +20,7 @@ class Map extends React.Component {
     }
 
     componentDidMount() {
-        const url = '/world-50m.json';
+        const url = 'world-50m.json';
         fetch(url)
             .then(response => response.json()
                 .then(world => this.setState({ world }))

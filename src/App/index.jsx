@@ -22,7 +22,7 @@ class App extends React.Component {
     }
 
     componentDidMount(){
-        const url = '/takeout/data.ics';
+        const url = 'data.ics';
         fetch(url)
             .then(response => {
                 if(response.status === 200) {
