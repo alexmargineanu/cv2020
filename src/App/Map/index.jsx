@@ -20,7 +20,7 @@ class Map extends React.Component {
     }
 
     componentDidMount() {
-        const url = 'world-50m.json';
+        const url = 'https://alexmargineanu.github.io/cv2020/world-50m.json';
         fetch(url)
             .then(response => response.json()
                 .then(world => this.setState({ world }))
@@ -34,7 +34,7 @@ class Map extends React.Component {
 
         if(prevState.world !== world && world !== null){
             Promise.all([
-                d3.csv('geonames_cities100000.csv'),
+                d3.csv('https://alexmargineanu.github.io/cv2020/geonames_cities100000.csv'),
             ]).then(([geoDb]) => {
 
                 const data = new DataPipeline({

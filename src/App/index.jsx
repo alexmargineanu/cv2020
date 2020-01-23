@@ -22,7 +22,7 @@ class App extends React.Component {
     }
 
     componentDidMount(){
-        const url = 'data.ics';
+        const url = 'https://alexmargineanu.github.io/cv2020/data.ics';
         fetch(url)
             .then(response => {
                 if(response.status === 200) {
