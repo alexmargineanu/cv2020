@@ -5,8 +5,9 @@
   "private": true,
   "repository": {
     "type": "git",
-    "url": "https://bitbucket.org/amargineanu/cv2020.git"
+    "url": "https://github.com/alexmargineanu/cv2020"
   },
+  "homepage" : "http://alexmargineanu.github.io",
   "author": {
     "name": "Alexandru Margineanu",
     "email": "alex.margineanu@gmail.com"
