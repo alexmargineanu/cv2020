@@ -8,7 +8,7 @@ import {
 const projection = d3.geoMercator().translate(
     [window.innerWidth / 2, window.innerHeight / 2]
 ).scale(
-    160
+    190
 );
 
 const path = d3.geoPath().projection(projection);
@@ -30,7 +30,7 @@ class RenderPipeline  {
         circles.enter().append('svg:circle')
             .attr('cx', d => projection([d.longitude,d.latitude])[0])
             .attr('cy', d => projection([d.longitude,d.latitude])[1])
-            .attr('r',  5.5)
+            .attr('r',  4.5)
             .attr('class', d => `city${cssClass(d.name)}`);
         circles.exit().remove();
 
@@ -120,7 +120,7 @@ class RenderPipeline  {
                     dashedPath,
                 ];
                 setVisible.forEach(path => path.style('display', 'block'));
-                toCity.attr('r', parseFloat(toCity.attr('r'))+0.5);
+                toCity.attr('r', parseFloat(toCity.attr('r'))+0.25);
             })
             .on('end',function(){
                 dashedPath.style('display', 'none');
