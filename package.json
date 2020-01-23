@@ -3,7 +3,6 @@
   "name": "cv2020",
   "description": "Flight data visualiser with d3 based on calendar events (ICAL)",
   "version": "0.1.0",
-  "private": true,
   "repository": {
     "type": "git",
     "url": "https://github.com/alexmargineanu/cv2020"
