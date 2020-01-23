@@ -1,7 +1,5 @@
 import moment from 'moment';
 
-import airportCodesToCities from '../DB/airportCodesToCities';
-
 class citiesPipeline {
     constructor(args) {
         this.cities = args.cities;
@@ -36,18 +34,8 @@ class citiesPipeline {
             withAirportCode.pop();
             let from = withAirportCode.join(' ');
 
-            // get Tenerife from "TFN TFN"
-            if (from && from.length === 3 && airportCodesToCities[from]) {
-                from = airportCodesToCities[from];
-            }
-
             // get BCN from "Flight to BCN (FR 3064)"
             let to = e.summary.replace('Flight to ', '').replace(/\([^()]*\)/g, '').trim();
-
-            // get Barcelona from BCN
-            if (to && to.length === 3 && airportCodesToCities[to]) {
-                to = airportCodesToCities[to];
-            }
 
             return {
                 ...e,
