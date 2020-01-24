@@ -114,15 +114,16 @@ class RenderPipeline  {
                     arrow,
                     flightPath,
                     fromCity,
+                    toCity,
                     dashedPath,
                 ];
                 setVisible.forEach(path => path.style('display', 'block'));
                 toCity.attr('r', parseFloat(toCity.attr('r'))+0.25);
             })
             .on('end',function(){
-                dashedPath.style('display', 'none');
+                dashedPath.style('stroke', '#999');
+                flightPath.style('display', 'none');
                 arrow.style('display', 'none');
-                toCity.style('display', 'block')
             });
 
         if(totalLength){
