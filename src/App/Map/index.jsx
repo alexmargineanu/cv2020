@@ -51,7 +51,7 @@ class Map extends React.Component {
                         flights: data.addGeoData().valFlights,
                         getCurrentFlight: (f) => this.props.getCurrentFlight(f),
                         flightTime: 2300,
-                    }).renderLabels().renderFlightPath().renderCircles();
+                    }).renderFlightPath().renderCircles().renderLabels();
                 }, 2000);
             }).catch(err => console.log('Error loading or parsing data.', err));
         }

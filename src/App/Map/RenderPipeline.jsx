@@ -88,8 +88,6 @@ class RenderPipeline  {
         const arrow           = d3.select('.arrow');
         const fromCity        = d3.select(`.city${cssClass(d.from)}`);
         const toCity          = d3.select(`.city${cssClass(d.to)}`);
-        const fromCityLabel   = d3.select(`.label${cssClass(d.from)}`);
-        const toCityLabel     = d3.select(`.label${cssClass(d.to)}`);
         const flightPath      = d3.select(`.flight-path${cssClass(d.uid)}`);
         const dashedPath      = d3.select(`.dashed${cssClass(d.uid)}`);
 
@@ -116,7 +114,6 @@ class RenderPipeline  {
                     arrow,
                     flightPath,
                     fromCity,
-                    fromCityLabel,
                     dashedPath,
                 ];
                 setVisible.forEach(path => path.style('display', 'block'));
@@ -126,7 +123,6 @@ class RenderPipeline  {
                 dashedPath.style('display', 'none');
                 arrow.style('display', 'none');
                 toCity.style('display', 'block')
-                toCityLabel.style('display', 'block')
             });
 
         if(totalLength){
