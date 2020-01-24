@@ -127,6 +127,7 @@ class RenderPipeline  {
             });
 
         if(totalLength){
+            /*todo: 
             arrow.transition(t)
                 .attrTween('transform',function(){
                     return function(t){
@@ -134,7 +135,7 @@ class RenderPipeline  {
                         return 'translate(' + pointAtLength(pos) + ') rotate( ' + angleAtLength(pos) + ')';
                     };
                 });
-
+            */
             flightPath.transition(t)
                 .attrTween('stroke-dasharray',function(){
                     return d3.interpolateString('0,' + totalLength,totalLength + ',' + totalLength);
