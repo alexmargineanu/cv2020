@@ -25,9 +25,12 @@ class citiesPipeline {
 
     addFlightDuration() {
         this.flights = this.flights.map(e => {
+            const duration = parseFloat(moment(e.dtend).diff(moment(e.dtstart), 'hours', true)).toFixed(1);
+            const distance = duration * 750/*km/h*/;
             return {
                 ...e,
-                duration: parseFloat(moment(e.dtend).diff(moment(e.dtstart), 'hours', true)).toFixed(1),
+                duration,
+                distance,
             };
         });
 

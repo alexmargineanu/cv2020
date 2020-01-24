@@ -19,13 +19,15 @@ class Table extends React.Component {
         super();
         this.state = {
             totalTime: 0,
+            totalDistance: 0,
         };
     }
 
     componentDidUpdate(prevProps, prevState) {
         if(this.props.flight && prevProps.flight !== this.props.flight) {
             this.setState({
-                totalTime: (parseFloat(prevState.totalTime) + parseFloat(this.props.flight.duration)).toFixed(1)
+                totalTime: (parseFloat(prevState.totalTime) + parseFloat(this.props.flight.duration)).toFixed(1),
+                totalDistance: (parseFloat(prevState.totalDistance) + parseFloat(this.props.flight.distance)).toFixed(0),
             });
         }
     }
@@ -37,6 +39,7 @@ class Table extends React.Component {
 
         const {
             totalTime,
+            totalDistance,
         } = this.state;
 
         if(!flight.from) {
@@ -74,7 +77,7 @@ class Table extends React.Component {
                     </li>
                 </ul>
                 <small className="info">
-                    <FontAwesomeIcon icon={faClock} /> {totalTime} hours in the air
+                    Total flight time: <strong>{totalTime} h</strong>, distance: <strong>{totalDistance} km</strong> (aprox)
                 </small>
             </section>
         );
