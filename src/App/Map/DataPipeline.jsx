@@ -11,6 +11,15 @@ class citiesPipeline {
     }
 
     get valFlights() {
+        this.flights.sort(function(a, b) {
+          if (a.dtstart < b.dtstart) {
+            return -1;
+          }
+          if (a.dtstart > b.dtstart) {
+            return 1;
+          }
+          return 0;
+        });
         return this.flights;
     }
 
