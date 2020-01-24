@@ -65,10 +65,10 @@ class RenderPipeline  {
             }
         });
 
-        this.svg.append('path')
+/*        this.svg.append('path')
             .attr('d', 'M-5,0 L-5,5 L5,0 L-5,-5 Z')
             .attr('class', 'arrow');
-
+*/
         this.svg.selectAll('.flight-path').data(this.flights).each(
             (flight, index) => {
                 if(flight.to && flight.from) {
@@ -85,7 +85,7 @@ class RenderPipeline  {
     }
 
     animateFlightPath(d) {
-        const arrow           = d3.select('.arrow');
+        //const arrow           = d3.select('.arrow');
         const fromCity        = d3.select(`.city${cssClass(d.from)}`);
         const toCity          = d3.select(`.city${cssClass(d.to)}`);
         const flightPath      = d3.select(`.flight-path${cssClass(d.uid)}`);
@@ -111,7 +111,7 @@ class RenderPipeline  {
             .delay(0)
             .on('start',function(){
                 const setVisible = [
-                    arrow,
+                    //arrow,
                     flightPath,
                     fromCity,
                     toCity,
@@ -123,11 +123,11 @@ class RenderPipeline  {
             .on('end',function(){
                 dashedPath.style('stroke', '#999');
                 flightPath.style('display', 'none');
-                arrow.style('display', 'none');
+                //arrow.style('display', 'none');
             });
 
         if(totalLength){
-            /*todo: 
+            /*todo:
             arrow.transition(t)
                 .attrTween('transform',function(){
                     return function(t){
