@@ -1,13 +1,17 @@
 .Table {
-
     position: absolute;
-    bottom: 4%;
     z-index: 999;
     width: 60%;
     left: 20%;
     @media(max-width: 480px) {
         width: 96%;
         left: 2%;
+    }
+
+    transition: bottom 1s ease-in-out;
+    bottom: -20%;
+    &.table-appear-done {
+        bottom: 4%;
     }
 
     h1 {

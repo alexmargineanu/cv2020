@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
 import Moment from 'react-moment';
-
+import { CSSTransition } from 'react-transition-group';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faPlaneDeparture,
@@ -53,33 +52,40 @@ class Table extends React.Component {
         }
 
         return (
-            <section className="Table">
-                <h1>
-                    <FontAwesomeIcon icon={faCalendarAlt} /> <Moment format='DD MMM YYYY'>{flight.dtstart}</Moment>
-                </h1>
-                <ul>
-                    <li>
-                        <h2>
-                            <FontAwesomeIcon icon={faPlaneDeparture} /> {flight.from}
-                        </h2>
-                    </li>
-                    <li className="separator">
-                        <Moment format='hh:mma'>{flight.dtstart}</Moment>
-                        <small>
-                            <FontAwesomeIcon icon={faClock} /> {flight.duration} h
-                        </small>
-                        <Moment format='hh:mma'>{flight.dtend}</Moment>
-                    </li>
-                    <li>
-                        <h2 style={{textAlign: 'right'}}>
-                            {flight.to} <FontAwesomeIcon icon={faPlaneArrival} />
-                        </h2>
-                    </li>
-                </ul>
-                <small className="info">
-                    Total flight time: <strong>{totalTime} h</strong>, distance: <strong>{totalDistance} km</strong> (aprox)
-                </small>
-            </section>
+            <CSSTransition
+                timeout={500}
+                classNames="table"
+                in={true}
+                appear={true}
+            >
+                <section className="Table">
+                    <h1>
+                        <FontAwesomeIcon icon={faCalendarAlt} /> <Moment format='DD MMM YYYY'>{flight.dtstart}</Moment>
+                    </h1>
+                    <ul>
+                        <li>
+                            <h2>
+                                <FontAwesomeIcon icon={faPlaneDeparture} /> {flight.from}
+                            </h2>
+                        </li>
+                        <li className="separator">
+                            <Moment format='hh:mma'>{flight.dtstart}</Moment>
+                            <small>
+                                <FontAwesomeIcon icon={faClock} /> {flight.duration} h
+                            </small>
+                            <Moment format='hh:mma'>{flight.dtend}</Moment>
+                        </li>
+                        <li>
+                            <h2 style={{textAlign: 'right'}}>
+                                {flight.to} <FontAwesomeIcon icon={faPlaneArrival} />
+                            </h2>
+                        </li>
+                    </ul>
+                    <small className="info">
+                        Total flight time: <strong>{totalTime} h</strong>, distance: <strong>{totalDistance} km</strong> (aprox)
+                    </small>
+                </section>
+            </CSSTransition>
         );
     }
 }
