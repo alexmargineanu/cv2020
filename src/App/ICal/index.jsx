@@ -15,9 +15,7 @@ const iCalParser = (data) => {
         const calendarEntries = ICAL.parse(data);
         if(calendarEntries.length && calendarEntries[2]){
             const events = calendarEntries[2];
-            const e = events.map(event => flattenEvent(event));
-            //dumpCalendar(e);
-            return e;
+            return events.map(event => flattenEvent(event));
         } else {
             console.error('no parsed events');
             return [];

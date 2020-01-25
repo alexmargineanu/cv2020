@@ -17,12 +17,12 @@ export { path, projection };
 
 class RenderPipeline  {
 
-    constructor(args) {
-        this.cities = args.cities;
-        this.flights = args.flights;
-        this.updateFlight = args.getCurrentFlight;
-        this.flightTime = args.flightTime || 2500;
-        this.svg = args.svg;
+    constructor(props) {
+        this.cities = props.cities;
+        this.flights = props.flights;
+        this.updateFlight = props.getCurrentFlight;
+        this.flightTime = props.flightTime || 2500;
+        this.svg = props.svg;
     }
 
     renderCircles() {

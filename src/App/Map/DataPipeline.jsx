@@ -2,9 +2,9 @@ import moment from 'moment';
 import airports2cities from '../DB/airports2cities';
 
 class DataPipeline {
-    constructor(args) {
-        this.cities = args.cities;
-        this.flights = args.flights;
+    constructor(props) {
+        this.cities = props.cities;
+        this.flights = props.flights;
     }
 
     get valCities() {
@@ -12,26 +12,29 @@ class DataPipeline {
     }
 
     get valFlights() {
-        this.flights.sort(function(a, b) {
-          if (a.dtstart < b.dtstart) {
-            return -1;
-          }
-          if (a.dtstart > b.dtstart) {
-            return 1;
-          }
-          return 0;
-        });
-        return this.flights;
+        return [...this.flights].sort(
+            (a, b) => a.dtstart < b.dtstart ? -1 : a.dtstart > b.dtstart ? 1 : 0
+        );
     }
 
     addFlightDuration() {
-        this.flights = this.flights.map(e => {
-            const duration = parseFloat(moment(e.dtend).diff(moment(e.dtstart), 'hours', true)).toFixed(1);
-            const distance = duration * 750/*km/h*/;
+        this.flights = this.flights.map(f => {
+            const duration = parseFloat(moment(f.dtend).diff(moment(f.dtstart), 'hours', true)).toFixed(1);
             return {
-                ...e,
+                ...f,
                 duration,
-                distance,
+            };
+        });
+
+        return this;
+    }
+
+    addFlightDistance() {
+        this.flights = this.flights.map(f => {
+            const duration = f.duration ? f.duration : parseFloat(moment(f.dtend).diff(moment(f.dtstart), 'hours', true)).toFixed(1);
+            return {
+                ...f,
+                distance: duration * 750 /*km/h average speed*/,
             };
         });
 
@@ -40,13 +43,12 @@ class DataPipeline {
 
 
     addCityNames() {
-        this.flights = this.flights.map(e => {
+        this.flights = this.flights.map(f => {
 
-            // get London from "London LHR"
-            const withAirportCode = e.location.split(' ');
+            // get Cape Town from "Cape Town CPT"
+            const withAirportCode = f.location.split(' ');
             withAirportCode.pop();
             let from = withAirportCode.join(' ');
-
 
             // get Tenerife from "TFN TFN"
             if (from.length === 3 && airports2cities[from]) {
@@ -54,14 +56,15 @@ class DataPipeline {
             }
 
             // get BCN from "Flight to BCN (FR 3064)"
-            let to = e.summary.replace('Flight to ', '').replace(/\([^()]*\)/g, '').trim();
+            let to = f.summary.replace('Flight to ', '').replace(/\([^()]*\)/g, '').trim();
 
             // get Barcelona from BCN
             if (to.length === 3 && airports2cities[to]) {
                 to = airports2cities[to];
             }
+
             return {
-                ...e,
+                ...f,
                 from,
                 to,
             };
@@ -82,14 +85,10 @@ class DataPipeline {
         this.cities = this.cities.map(
             city => {
                 const occurence = this.flights.reduce(
-                    (occurence, flight) => {
-                        if(flight.to === city.name || flight.from === city.name){
-                            occurence++;
-                        }
-                        return occurence;
-                    }, 0
+                    (occurence, flight) => flight.to === city.name || flight.from === city.name ? occurence++ : occurence,
+                    0
                 );
-                return { ... city, occurence };
+                return { ...city, occurence };
             }
         );
 
@@ -100,12 +99,6 @@ class DataPipeline {
         this.flights = this.flights.map(flight => {
             const to = this.cities.findIndex(city => city.name === flight.to);
             const from = this.cities.findIndex(city => city.name === flight.from);
-            const fromCoords = {
-                fromCoords: from === -1 ? [] : [this.cities[from].longitude, this.cities[from].latitude]
-            };
-            const toCoords = {
-                toCoords: to === -1 ? [] : [this.cities[to].longitude, this.cities[to].latitude]
-            };
             const flightCoords = {
                 flightCoords: to > -1 && from > -1 ? [
                     [this.cities[from].longitude, this.cities[from].latitude],
@@ -115,8 +108,6 @@ class DataPipeline {
             const obj = {
                 ...flight,
                 ...flightCoords,
-                ...fromCoords,
-                ...toCoords,
             };
             return obj;
         });

@@ -35,14 +35,14 @@ class Map extends React.Component {
         if(prevState.world !== world && world !== null){
             Promise.all([
                 d3.csv('https://alexmargineanu.github.io/cv2020/geonames_cities100000.csv'),
-            ]).then(([geoDb]) => {
-
-                const data = new DataPipeline({
-                    cities: geoDb,
-                    flights: this.props.flights
-                }).addCityNames();
+            ]).then(([cities]) => {
 
                 new D3Map({ svg, world });
+
+                const data = new DataPipeline({
+                    cities,
+                    flights: this.props.flights
+                }).addCityNames();
 
                 setTimeout(()=>{
                     new RenderPipeline({
@@ -52,7 +52,7 @@ class Map extends React.Component {
                         getCurrentFlight: (f) => this.props.getCurrentFlight(f),
                         flightTime: 2300,
                     }).renderFlightPath().renderCircles().renderLabels();
-                }, 2000);
+                }, 2800);
             }).catch(err => console.log('Error loading or parsing data.', err));
         }
     }

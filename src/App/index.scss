@@ -1,9 +1,3 @@
-$screen-sm: 576px;
-$screen-md: 768px;
-$screen-lg: 992px;
-$screen-xl: 1200px;
-$screen-xxl: 1500px;
-
 body {
     margin: 0;
     padding: 0;
@@ -19,11 +13,12 @@ body {
 
 .water {
     opacity: 0;
-    transition: opacity 3s linear;
+    transition: opacity 3.5s linear;
     background-image: linear-gradient(to right, #25c481, #25b7c4);
-}
-.water-appear-done {
-    opacity: 1;
+
+    &-appear-done {
+        opacity: 1;
+    }
 }
 
 a {

@@ -30,15 +30,12 @@ class App extends React.Component {
                         .then(txt => {
                             const parsedEvents = iCalParser(txt);
                             if(parsedEvents){
-                                const flightEvents = parsedEvents.filter(d => {
-                                    if(d.summary){
-                                        return d.summary.indexOf('Flight to') > -1;
-                                    }
-                                    return false;
-                                });
+                                const flightEvents = parsedEvents.filter(
+                                    f => f.summary ? f.summary.indexOf('Flight to') > -1 : false
+                                );
                                 const flights = new DataPipeline({
                                     flights: flightEvents
-                                }).addCityNames().addFlightDuration().valFlights;
+                                }).addCityNames().addFlightDuration().addFlightDistance().valFlights;
 
                                 this.setState({ flights });
                             }
@@ -55,7 +52,7 @@ class App extends React.Component {
         const { flights, flight } = this.state;
         return (
             <CSSTransition
-                timeout={0}
+                timeout={500}
                 classNames="water"
                 in={true}
                 appear={true}
@@ -63,7 +60,7 @@ class App extends React.Component {
                 <div className="water">
                     <Map
                         flights={flights}
-                        getCurrentFlight={f=>this.updateCurrentFlight(f)}
+                        getCurrentFlight={f => this.updateCurrentFlight(f)}
                     />
                     <Table
                         flight={flight}
