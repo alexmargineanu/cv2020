@@ -1,6 +1,7 @@
 import moment from 'moment';
+import airports2cities from '../DB/airports2cities';
 
-class citiesPipeline {
+class DataPipeline {
     constructor(args) {
         this.cities = args.cities;
         this.flights = args.flights;
@@ -46,9 +47,19 @@ class citiesPipeline {
             withAirportCode.pop();
             let from = withAirportCode.join(' ');
 
+
+            // get Tenerife from "TFN TFN"
+            if (from.length === 3 && airports2cities[from]) {
+                from = airports2cities[from];
+            }
+
             // get BCN from "Flight to BCN (FR 3064)"
             let to = e.summary.replace('Flight to ', '').replace(/\([^()]*\)/g, '').trim();
 
+            // get Barcelona from BCN
+            if (to.length === 3 && airports2cities[to]) {
+                to = airports2cities[to];
+            }
             return {
                 ...e,
                 from,
@@ -114,4 +125,4 @@ class citiesPipeline {
     }
 }
 
-export default citiesPipeline;
+export default DataPipeline;

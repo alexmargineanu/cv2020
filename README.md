@@ -30,6 +30,8 @@ END:VCALENDAR
   [topojson/world-atlas](https://github.com/topojson/world-atlas)
 - **cities100000.csv** This data is from GeoNames, and contains (name, latitude, longitude) for 23460 cities around the world. This only includes cities with more than 100,000 people.
   [curran/data](https://github.com/curran/data/blob/gh-pages/geonames/cities100000.csv)
+- **airports.csv** This data is from OurAirports, I changed the csv format to an object mapping only the airport code to the city name.
+    [ourairports.com](https://ourairports.com/data/)
 
 
 ## Running the project:
