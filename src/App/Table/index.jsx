@@ -54,7 +54,7 @@ class Table extends React.Component {
         return (
             <CSSTransition
                 timeout={500}
-                classNames="table"
+                classNames="transition"
                 in={true}
                 appear={true}
             >

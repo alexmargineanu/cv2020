@@ -171,7 +171,6 @@ class RenderPipeline  {
 
         return this;
     }
-
 }
 
 export default RenderPipeline;

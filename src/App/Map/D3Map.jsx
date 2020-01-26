@@ -11,7 +11,7 @@ class D3Map {
         this.worldMap();
     }
 
-    worldMap(){
+    worldMap() {
         this.svg.append('path')
             .attr('d', path)
             .datum(d3.geoGraticule())

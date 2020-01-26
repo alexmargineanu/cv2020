@@ -17,11 +17,11 @@ class App extends React.Component {
         };
     }
 
-    updateCurrentFlight(flight){
+    updateCurrentFlight(flight) {
         this.setState({ flight });
     }
 
-    componentDidMount(){
+    componentDidMount() {
         const url = 'https://alexmargineanu.github.io/cv2020/data.ics';
         fetch(url)
             .then(response => {

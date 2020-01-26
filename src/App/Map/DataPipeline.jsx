@@ -41,7 +41,6 @@ class DataPipeline {
         return this;
     }
 
-
     addCityNames() {
         this.flights = this.flights.map(f => {
 
@@ -50,7 +49,7 @@ class DataPipeline {
             withAirportCode.pop();
             let from = withAirportCode.join(' ');
 
-            // get Tenerife from "TFN TFN"
+            // change TFN to Tenerife
             if (from.length === 3 && airports2cities[from]) {
                 from = airports2cities[from];
             }
@@ -58,7 +57,7 @@ class DataPipeline {
             // get BCN from "Flight to BCN (FR 3064)"
             let to = f.summary.replace('Flight to ', '').replace(/\([^()]*\)/g, '').trim();
 
-            // get Barcelona from BCN
+            // change BCN to Barcelona
             if (to.length === 3 && airports2cities[to]) {
                 to = airports2cities[to];
             }
@@ -73,7 +72,7 @@ class DataPipeline {
         return this;
     }
 
-    filterCities(){
+    filterCities() {
         this.cities = this.cities.filter(city => this.flights.find(
             flight => flight.to === city.name || flight.from === city.name
         ));
@@ -84,11 +83,11 @@ class DataPipeline {
     countCityOccurrence() {
         this.cities = this.cities.map(
             city => {
-                const occurence = this.flights.reduce(
-                    (occurence, flight) => flight.to === city.name || flight.from === city.name ? occurence++ : occurence,
+                const i = this.flights.reduce(
+                    (i, flight) => flight.to === city.name || flight.from === city.name ? i++ : i,
                     0
                 );
-                return { ...city, occurence };
+                return { ...city, occurrence: i };
             }
         );
 
@@ -105,11 +104,11 @@ class DataPipeline {
                     [this.cities[to].longitude, this.cities[to].latitude]
                 ] : []
             };
-            const obj = {
+
+            return {
                 ...flight,
                 ...flightCoords,
             };
-            return obj;
         });
 
         return this;
