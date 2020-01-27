@@ -2,20 +2,17 @@ import * as ICAL from 'ical.js';
 
 const iCalParser = (data) => {
 
-    const flattenEvent = (e) => {
-        let event = {};
-        for(let i = 0; i < e[1].length; i++) {
-            let prop = e[1][i];
-            event[prop[0]] = prop[3];
-        }
-        return event;
+    const flattenEvent = iCalEvent => {
+        return iCalEvent[1].reduce((event, values) => {
+            event[values[0]] = values[3];
+            return event;
+        }, {});
     };
 
     try {
-        const calendarEntries = ICAL.parse(data);
-        if(calendarEntries.length && calendarEntries[2]){
-            const events = calendarEntries[2];
-            return events.map(event => flattenEvent(event));
+        const iCalEvents = ICAL.parse(data);
+        if(iCalEvents.length && iCalEvents[2]){
+            return iCalEvents[2].map(iCalEvent => flattenEvent(iCalEvent));
         } else {
             console.error('no parsed events');
             return [];
