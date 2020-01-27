@@ -27,7 +27,6 @@ class D3Map {
 
 
         const zoomed = () => {
-            //this.svg.select('.arrow').attr('transform', d3.event.transform);
             this.svg.selectAll('path').attr('transform', d3.event.transform);
             this.svg.selectAll('circle').attr('transform', d3.event.transform);
             this.svg.selectAll('text').attr('transform', d3.event.transform);
