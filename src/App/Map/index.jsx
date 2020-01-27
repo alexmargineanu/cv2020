@@ -11,7 +11,7 @@ import './index.scss';
 
 class Map extends React.Component {
 
-    constructor(){
+    constructor() {
         super();
         this.mapRef = React.createRef();
         this.state = {
@@ -20,8 +20,7 @@ class Map extends React.Component {
     }
 
     componentDidMount() {
-        const url = 'https://alexmargineanu.github.io/cv2020/world-50m.json';
-        fetch(url)
+        fetch('https://alexmargineanu.github.io/cv2020/world-50m.json')
             .then(response => response.json()
                 .then(world => this.setState({ world }))
             )
@@ -57,7 +56,7 @@ class Map extends React.Component {
         }
     }
 
-    render(){
+    render() {
         const { world } = this.state;
 
         if (!world) {

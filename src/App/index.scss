@@ -16,7 +16,7 @@ body {
     transition: opacity 3.5s linear;
     background-image: linear-gradient(to right, #25c481, #25b7c4);
 
-    &-appear-done {
+    &.transition-appear-done {
         opacity: 1;
     }
 }

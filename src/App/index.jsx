@@ -31,7 +31,7 @@ class App extends React.Component {
                             const parsedEvents = iCalParser(txt);
                             if(parsedEvents){
                                 const flightEvents = parsedEvents.filter(
-                                    f => f.summary ? f.summary.indexOf('Flight to') > -1 : false
+                                    ({ summary }) => summary ? summary.includes('Flight to') : false
                                 );
                                 const flights = new DataPipeline({
                                     flights: flightEvents
@@ -53,7 +53,7 @@ class App extends React.Component {
         return (
             <CSSTransition
                 timeout={500}
-                classNames="water"
+                classNames="transition"
                 in={true}
                 appear={true}
             >
