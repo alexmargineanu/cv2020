@@ -14,59 +14,46 @@ class Map extends React.Component {
     constructor() {
         super();
         this.mapRef = React.createRef();
-        this.state = {
-            world: [],
-        };
+    }
+
+    shouldComponentUpdate() {
+        return false;
     }
 
     componentDidMount() {
         fetch('https://alexmargineanu.github.io/cv2020/world-50m.json')
             .then(response => response.json()
-                .then(world => this.setState({ world }))
+                .then(world => {
+
+                    const svg = d3.select(this.mapRef.current);
+                    new D3Map({ svg, world });
+
+                    Promise.all([
+                        d3.csv('https://alexmargineanu.github.io/cv2020/geonames_cities100000.csv'),
+                    ]).then(([cities]) => {
+
+                        const data = new DataPipeline({
+                            cities,
+                            flights: this.props.flights
+                        }).addCityNames();
+
+                        setTimeout(()=>{
+                            new RenderPipeline({
+                                svg,
+                                cities: data.filterCities().valCities,
+                                flights: data.addGeoData().valFlights,
+                                getCurrentFlight: (f) => this.props.getCurrentFlight(f),
+                                flightTime: 2300,
+                            }).renderFlightPath().renderCircles().renderLabels();
+                        }, 2800);
+                    }).catch(err => console.log('Error loading or parsing data.', err));
+                })
             )
             .catch(error => console.error(error));
     }
 
-    componentDidUpdate(prevProps, prevState) {
-        const { world } = this.state;
-        const svg = d3.select(this.mapRef.current);
-
-        if(prevState.world !== world && world !== null){
-            Promise.all([
-                d3.csv('https://alexmargineanu.github.io/cv2020/geonames_cities100000.csv'),
-            ]).then(([cities]) => {
-
-                new D3Map({ svg, world });
-
-                const data = new DataPipeline({
-                    cities,
-                    flights: this.props.flights
-                }).addCityNames();
-
-                setTimeout(()=>{
-                    new RenderPipeline({
-                        svg: svg,
-                        cities: data.filterCities().valCities,
-                        flights: data.addGeoData().valFlights,
-                        getCurrentFlight: (f) => this.props.getCurrentFlight(f),
-                        flightTime: 2300,
-                    }).renderFlightPath().renderCircles().renderLabels();
-                }, 2800);
-            }).catch(err => console.log('Error loading or parsing data.', err));
-        }
-    }
 
     render() {
-        const { world } = this.state;
-
-        if (!world) {
-            return <small>Error</small>;
-        }
-
-        if (world.length && world.length === 0) {
-            return <small>Loading</small>;
-        }
-
         return (
             <section className="map">
                 <svg ref={this.mapRef} />
