@@ -1,5 +1,7 @@
 ## About the project
-The app takes as input the **.ics** file exported from your favorite calendar, and outputs your flight history animated on a D3 map of the world.
+I've always wanted to produce a **SVG animation** with the flights I took over the years, but in an automated way, without waisting time to input all the flight data.
+
+The easiest way to do this was to export the automated flight confirmation events created by Google in *calendar.google.com*, parse the data with *Mozilla*'s **iCal** library and then use the magic of **D3.js** to manipulate the SVG. 
 
 **Demo:** [https://alexmargineanu.github.io/cv2020/](https://alexmargineanu.github.io/cv2020/)
 ![UI Preview](https://alexmargineanu.github.io/cv2020/preview.png)
