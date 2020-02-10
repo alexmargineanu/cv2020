@@ -5,11 +5,25 @@ import {
     cssClass
 } from './utils';
 
-const projection = d3.geoMercator().translate(
-    [window.innerWidth / 2, window.innerHeight / 2]
-).scale(
-    190
-);
+const width = window.innerWidth;
+const height = window.innerHeight;
+
+const projections = {
+    geoMercator: d3.geoMercator().translate(
+        [width / 2, height / 2]
+    ).scale(
+        190
+    ),
+    geoConicConformal: d3.geoConicConformal()
+        .parallels([35, 65])
+        .rotate([-20, 0])
+        .scale(width)
+        .center([0, 52])
+        .translate([width / 2, height / 2])
+        .precision(0.2),
+};
+
+const projection = projections.geoConicConformal;
 
 const path = d3.geoPath().projection(projection);
 
