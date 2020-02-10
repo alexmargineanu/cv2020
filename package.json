@@ -1,7 +1,7 @@
 {
   "homepage": "https://alexmargineanu.github.io/cv2020/",
   "name": "cv2020",
-  "description": "Flight data visualiser with d3 based on calendar events (ICAL)",
+  "description": "SVG Flight data visualiser with D3.js",
   "version": "0.1.0",
   "repository": {
     "type": "git",
