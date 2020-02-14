@@ -23,7 +23,7 @@ const projections = {
         .precision(0.2),
 };
 
-const projection = projections.geoConicConformal;
+const projection = projections.geoMercator;
 
 const path = d3.geoPath().projection(projection);
 

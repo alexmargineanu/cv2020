@@ -45,7 +45,7 @@ class Map extends React.Component {
                                 getCurrentFlight: (f) => this.props.getCurrentFlight(f),
                                 flightTime: 2300,
                             }).renderFlightPath().renderCircles().renderLabels();
-                        }, 2800);
+                        }, 1800);
                     }).catch(err => console.log('Error loading or parsing data.', err));
                 })
             )
