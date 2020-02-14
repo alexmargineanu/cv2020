@@ -1,6 +1,6 @@
 {
   "short_name": "Flight data visualiser",
-  "name": "Flight data visualised based on calendar events (iCAL)",
+  "name": "SVG Flight data visualiser with D3.js",
   "icons": [
     {
       "src": "favicon.ico",
