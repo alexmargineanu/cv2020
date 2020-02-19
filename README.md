@@ -1,5 +1,5 @@
 ## About the project
-I've always wanted to generate a **SVG animation** with the flights I took over the years, but in an automated way, without waisting time to input all the flight data.
+I've always wanted to generate a **SVG animation** with the flights I took over the years, but in an automated way, without wasting time to input all the flight data.
 
 The easiest way to do this was to export the automated flight confirmation events created by Google in *calendar.google.com*, parse the data with *Mozilla*'s **iCal** library and then use the magic of **D3.js** to manipulate the SVG.
 
